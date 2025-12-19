@@ -1,7 +1,9 @@
 FROM alpine:latest
 
-ENV USERPROFILE=C:\Users\xxx
-ENV DOCKER_CERT_PATH=${USERPROFILE}\.docker\machine\machines\default
-ENV DOCKER_HOST=tcp://192.168.99.100
-ENV DOCKER_MACHINE_NAME=default
-ENV DOCKER_TLS_VERIFY=1
+RUN apk add --no-cache lighttpd
+
+COPY index.html /var/www/localhost/htdocs/
+
+EXPOSE 80
+
+CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
