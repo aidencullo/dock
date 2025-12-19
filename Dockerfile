@@ -1,8 +1,8 @@
-FROM alpine:latest
+FROM fedora:latest
 
-RUN apk add --no-cache lighttpd
+RUN dnf install -y lighttpd && dnf clean all
 
-COPY index.html /var/www/localhost/htdocs/
+COPY index.html /var/www/lighttpd/
 
 EXPOSE 80
 
